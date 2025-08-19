@@ -1,0 +1,6 @@
+.env
+composer.lock
+errors.log
+profile_pics
+audio
+vendor

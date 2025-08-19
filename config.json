@@ -1,0 +1,8 @@
+{
+  "mysql": {
+    "servername": "localhost",
+    "username": "assaf",
+    "password": "mydatabasemysql",
+    "dbname": "home_test"
+  }
+}
