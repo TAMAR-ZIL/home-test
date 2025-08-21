@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login with OTP</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <!-- Honeypot field (hidden from users) -->
+            <input type="text" id="honeypot" name="honeypot" style="display:none">
+            <button type="submit">Send OTP</button>
+        </form>
+        <div id="otpSection" style="display:none;">
+            <label for="otp">Enter OTP:</label>
+            <input type="text" id="otp" name="otp" maxlength="6">
+            <button id="verifyBtn">Verify OTP</button>
+        </div>
+        <div id="message"></div>
+    </div>
+    <script>
+    document.getElementById('loginForm').onsubmit = async function(e) {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const honeypot = document.getElementById('honeypot').value;
+        const res = await fetch('send_otp.php', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({username, honeypot})
+        });
+        const data = await res.json();
+        if (data.success) {
+            document.getElementById('otpSection').style.display = 'block';
+            document.getElementById('message').textContent = 'OTP sent to your email.';
+        } else {
+            document.getElementById('message').textContent = data.error || 'Error sending OTP.';
+        }
+    };
+    document.getElementById('verifyBtn').onclick = async function() {
+        const username = document.getElementById('username').value;
+        const otp = document.getElementById('otp').value;
+        const res = await fetch('verify_otp.php', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({username, otp})
+        });
+        const data = await res.json();
+        if (data.success) {
+            document.getElementById('message').textContent = 'Login successful! Token: ' + data.token;
+            // You can store the token in localStorage/sessionStorage for future requests
+        } else {
+            document.getElementById('message').textContent = data.error || 'OTP verification failed.';
+        }
+    };
+    </script>
+</body>
+</html>

@@ -37,6 +37,7 @@ $dotenv->load();
 		"plugins",
 		"general_functions",
 	]);
+	define("BREVO_API_KEY",$_ENV["BREVO_API_KEY_OTP"]);
 		// waclonedem_db28072025135752
 	$envPrefix = (strpos($_SERVER['HTTP_HOST'], 'localhost') !== false) ? 'LOCAL' : 'PROD';
 	define("MYSQL_DEFAULT_SERVERNAME",$_ENV["{$envPrefix}_DB_SERVER"]);

@@ -434,7 +434,7 @@ recordBtn.on("mousedown touchstart", async function (e) {
         }, 1000);
 
         // === החלפת תמונה ל־GIF בזמן הקלטה ===
-        recordImg.attr("src", "assets/images/recording.gif");
+        recordImg.attr("src", "assets/images/unnamed.png");
 
         console.log("Recording started");
     } catch (err) {

@@ -369,6 +369,7 @@
 		}
 		return false;
 	}
+	
 
 	$GLOBALS["mysql_connections"][0] = mysql_connect();	
 	$GLOBALS["mysql_now"] = mysql_fetch_array("SELECT NOW();")[0][0];

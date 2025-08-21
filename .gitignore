@@ -1,0 +1,7 @@
+.env
+errors.log
+config.json
+composer.json
+composer.lock
+log_me.txt
+package.jsonpackage-lock.json
